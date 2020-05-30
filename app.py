@@ -10,28 +10,37 @@ soundPath = r'C:\\Users\\rpski\\Desktop\\V3'
 
 def startChat():
     os.system('python -i chat.py')
+
+
 def startBaxter():
     os.system('python -i baxter.py')
 
 
-                                # START READING PREFERENCES #
+# START READING PREFERENCES #
 def ytApiKey():
     userin = simpledialog.askstring("Youtube API Key", "Api Key")
     jsonifySettings.writeSpecificSetting('settings.json', 'ytApiKey', userin)
+
+
 def takeUserInputConfigMenuoAuth():
     menuOauth = simpledialog.askstring("Twitch OAuth", "Oauth")
     jsonifySettings.writeSpecificSetting('settings.json', 'oAuth', menuOauth)
     return menuOauth
+
+
 def soundsFolderLocation():
     menuSoundFolderLocation = simpledialog.askstring("Sounds Folder Location", "C:\\location\\of\\this\\file\\Sounds") + '\\'
     jsonifySettings.writeSpecificSetting('settings.json', 'soundFolderLocation', menuSoundFolderLocation)
     return menuSoundFolderLocation
+
+
 def twitchLogin():
     tUser = simpledialog.askstring("Twitch Username", "Username")
     jsonifySettings.writeSpecificSetting('settings.json', 'twitchUser', tUser)
     tPass = simpledialog.askstring("Twitch Password", "Password")
     jsonifySettings.writeSpecificSetting('settings.json', 'twitchPass', tPass)
     return tUser, tPass
+
 
 def listDir(dir):
     commandList = []
@@ -41,15 +50,19 @@ def listDir(dir):
         fileName = fileName[:-4]
         commandList.append(fileName)
         commands.append('!' + fileName)
+
     return commandList, commands
 
-                                # STOP READING PREFERENCES #
-                                # 
-                                # START WRITE PREFERENCES FUNCTIONS #
+# STOP READING PREFERENCES #
+# 
+# START WRITE PREFERENCES FUNCTIONS #
+
 
 # TTS
 def writePrefTtsTrue():
     jsonifySettings.writeSpecificSetting('settings.json', 'ttsSetting', 1)
+
+
 def writePrefTtsFalse():
     jsonifySettings.writeSpecificSetting('settings.json', 'ttsSetting', 0)
 
@@ -58,37 +71,44 @@ def writePrefTtsFalse():
 def writePrefSoundTrue():
     jsonifySettings.writeSpecificSetting('settings.json', 'soundSetting', 1)
 
+
 def writePrefSoundFalse():
     jsonifySettings.writeSpecificSetting('settings.json', 'soundSetting', 0)
+
 
 def chatFileIndicatorTrue():
     print('chat indicator true')
     jsonifySettings.writeSpecificSetting('settings.json', 'chatRunning', 1)
 
+
 def chatFileIndicatorFalse():
     jsonifySettings.writeSpecificSetting('settings.json', 'chatRunning', 0)
+
 
 def sliderFileIndicatorTts(val):
     jsonifySettings.writeSpecificSetting('settings.json', 'ttsMaxChars', int(val))
 
+
 def sliderFileIndicatorSoundsCoolDown(val):
     jsonifySettings.writeSpecificSetting('settings.json', 'sliderFileIndicatorSoundsCoolDown', int(val))
 
+
 def autoPlayTrue():
     jsonifySettings.writeSpecificSetting('settings.json', 'autoPlaySR', 1)
+
 
 def autoPlayFalse():
     jsonifySettings.writeSpecificSetting('settings.json', 'autoPlaySR', 0)
 
 
-                                # STOP WRITE PREFERENCES FUNCTIONS #
-                                # 
-                                # START BUTTON FUNCTIONS #
+# STOP WRITE PREFERENCES FUNCTIONS #
+# 
+# START BUTTON FUNCTIONS #
 
 
 #  TTS 
 def ttsButtonFunction():
-    if(ttsStatus['bg'] == 'red'):
+    if ttsStatus['bg'] == 'red':
         ttsStatus['bg'] = 'green'
         writePrefTtsTrue()
         print('write true')
@@ -97,9 +117,10 @@ def ttsButtonFunction():
         writePrefTtsFalse()
         print('write false')
 
+
 # SOUND
 def soundsButtonFunction():
-    if(soundStatus['bg'] == 'red'):
+    if soundStatus['bg'] == 'red':
         soundStatus['bg'] = 'green'
         writePrefSoundTrue()
         print('write true')
@@ -108,9 +129,10 @@ def soundsButtonFunction():
         print('write false')
         soundStatus['bg'] = 'red'
 
+
 # Autoplay Song Requests
 def autoPlaySRButtonFunction():
-    if(autoPlayStatus['bg'] == 'red'):
+    if autoPlayStatus['bg'] == 'red':
         autoPlayStatus['bg'] = 'green'
         autoPlayTrue()
         print('write auto play! true')
@@ -119,9 +141,10 @@ def autoPlaySRButtonFunction():
         autoPlayFalse()
         print('write auto play false')
 
+
 # CONNECT TO CHAT
 def chatConnect():
-    if (chatStatuss['bg'] == 'red'):
+    if chatStatuss['bg'] == 'red':
         chatStatuss['bg'] = 'green'
         chatStatuss['text'] = 'Disconnect to chat!'
         chatConnectButton['text'] = 'Disconnect from Chat'
@@ -131,11 +154,10 @@ def chatConnect():
             # x.daemon = True
             x.start()
             sleep(1)
-            
         except Exception as e:
             print(e)
 
-    elif (chatStatuss['bg'] == 'green'):
+    elif chatStatuss['bg'] == 'green':
         print('else')
         chatFileIndicatorFalse()
         sleep(1)
@@ -146,7 +168,7 @@ def chatConnect():
 
 # Start Baxter
 def connectBaxter():
-    if (baxterStatus['bg'] == 'red'):
+    if baxterStatus['bg'] == 'red':
         baxterStatus['bg'] = 'green'
         baxterStatus['text'] = 'Disconnect Baxter'
         startBaxterButton['text'] = 'Disconnect Baxter'
@@ -154,33 +176,34 @@ def connectBaxter():
         x = threading.Thread(target=startBaxter, args=())
         x.start()
         sleep(1)
-
-
-    elif (baxterStatus['bg'] == 'green'):
+    elif baxterStatus['bg'] == 'green':
         jsonifySettings.writeSpecificSetting('settings.json', 'baxterRunning', 0)
         sleep(1)
         startBaxterButton['text'] = 'Connect Baxter'
         baxterStatus['bg'] = 'red'
         baxterStatus['text'] = 'Connect Baxter!'
 
+
 def getSliderValueTts(val):
     print(val)
     sliderFileIndicatorTts(val)
 
+
 def getSliderValueSoundsCoolDown(val):
     print(val)
     sliderFileIndicatorSoundsCoolDown(val)
+
 
 def scanSounds():
     commandList, commands = listDir(soundPath)
     print('Sounds files imported, commands have been generated')
     
 
-                                # STOP BUTTON FUNCTIONS #
+# STOP BUTTON FUNCTIONS #
 
 
 
-
+# Mercy on all ye who dare continue beyond this point
 window = Tk()
 
 window.title('Test window')
@@ -239,6 +262,7 @@ baxterStatus.pack(side=LEFT, fill=X, pady=1)
 chatStatuss = Label(bottomFrame, text='Chat Offline', bd=1, relief=SUNKEN, anchor=W, bg='red')
 chatStatuss.pack(side=LEFT, fill=X, pady=1)
 
+
 def check_requests_for_auto_play():
     with open('songRequests.txt', 'r+') as fin:
         data = fin.readlines()
@@ -256,6 +280,7 @@ def look_for_request():
             nextUp = data[0]
     with open('songRequests.txt', 'w') as fin:
         fin.write("".join(data[1:]))
+
     try:
         print(data)
         print(nextUp)
@@ -279,7 +304,9 @@ def check_song_request_file():
         autoPlayStatus['bg'] = 'green'
     elif sr_settings == 0 and requests_present is True:
         autoPlayStatus['bg'] = 'red'
+
     window.after(1000, check_song_request_file)
 
 window.after(1000, check_song_request_file)
 window.mainloop()
+
