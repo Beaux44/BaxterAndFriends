@@ -12,7 +12,8 @@ html(lang="en")
         - var buttonNames = ["TTS", "Sounds", "Auto Play Song Requests", "Eat some apples", "Take a shit"]
         .button-area
             each val in buttonNames
-                button=val
+                button
+                    div= val
 
         .slider-area
             - var sliderNames = [["Sounds Cooldown", "1", "30", "sounds-cooldown"], ["TTS Max Characters", "1", "500", "tts-max-chars"]]

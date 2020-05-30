@@ -32,20 +32,36 @@ body {
 .button-area {
     display: flex;
     flex-direction: column;
-    margin-bottom: 25px;
+    margin: 0 auto 25px auto;
+    max-width: 40em;
     width: 100%;
 
     button {
-        transition: background-color 0.5s;
+        $bg-c: lighten($bg-color, 20%);
         color: $text-color;
-        background-color: lighten($bg-color, 20%);
         border: none;
         outline: none;
         font-size: 20px;
         margin: 5px;
+        padding: 0;
+        cursor: pointer;
         border-radius: 12px;
-        &:hover {
-            background: $btn-bg-color-hover;
+        font-family: "Heebo";
+        height: calc(1em + 10px);
+        background: $btn-bg-color-hover;
+
+
+        > div {
+            height: 100%;
+            width: calc(100% + 2px);
+            margin-left: -1px;
+            border-radius: 12px;
+            transition: background-color 2.5s;
+            background-color: $bg-c;
+            
+            &:hover {
+                background-color: adjust-color($bg-c, $alpha: -1);
+            }
         }
     }
 }
