@@ -1,22 +1,24 @@
 doctype html
 html(lang="en")
     head
-        script(type="text/javascript", src="client_scripts.js")
-        link(rel="stylesheet", href="client_styles.css")
+        script(type="text/javascript", src="{{ url_for('static', path='/scripts.js') }}")
+        link(rel="stylesheet", href="{{ url_for('static', path='/styles.css') }}")
         link(href="https://fonts.googleapis.com/css2?family=Heebo&display=swap", rel="stylesheet")
+        link(rel="icon", href="{{ url_for('static', path='/Noot.png') }}")
         meta(charset="UTF-8")
         title Baxter and Friends Client
 
     body
-        - var buttonNames = ["TTS", "Sounds", "Auto Play Song Requests", "Start Baxter", "Disconnect from Chat"]
+        - var buttonNames = ["TTS", "Sounds", "Auto Play Song Requests", "Eat some apples", "Take a shit"]
         .button-area
             each val in buttonNames
                 button=val
 
         .slider-area
-            - var sliderNames = [["Sounds Cooldown", "1", "30", "sounds-cooldown", ""], ["TTS Max Characters", "1", "500", "tts-max-chars"]]
+            - var sliderNames = [["Sounds Cooldown", "1", "30", "sounds-cooldown"], ["TTS Max Characters", "1", "500", "tts-max-chars"]]
             each val in sliderNames
                 .slider-unit(id=val[3])
                     div= val[0]
                     input(type="range", min=val[1], max=val[2], id=val[3].split("-")[0])
                     .sliderInt
+
