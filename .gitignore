@@ -4,6 +4,7 @@ __pycache__
 *.css
 *.css.map
 *.pyc
+*.html
 
 # vim shit
 [._]*.s[a-v][a-z]
