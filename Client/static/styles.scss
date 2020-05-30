@@ -56,7 +56,7 @@ body {
             width: calc(100% + 2px);
             margin-left: -1px;
             border-radius: 12px;
-            transition: background-color 2.5s;
+            transition: background-color 0.35s ease-in-out;
             background-color: $bg-c;
             
             &:hover {

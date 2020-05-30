@@ -1,8 +1,8 @@
 doctype html
 html(lang="en")
     head
-        script(type="text/javascript", src="scripts.js")
-        link(rel="stylesheet", href="styles.css")
+        script(type="text/javascript", src="{{ url_for('static', path='/now_play_scripts.js') }}")
+        link(rel="stylesheet", href="{{ url_for('static', path='/now_play_styles.css') }}")
         link(href="https://fonts.googleapis.com/css2?family=Heebo&display=swap", rel="stylesheet")
         meta(charset="UTF-8")
         title Now Playing

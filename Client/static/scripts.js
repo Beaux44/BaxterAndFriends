@@ -1,27 +1,28 @@
 var socket = new WebSocket("ws://localhost/client");
-socket.onopen = function (event) {
-    socket.send("CONNECT");
+
+socket.onopen = function(event) {
+    socket.send(JSON.stringify({event: "CONNECT"}));
 };
 
-socket.onmessage = function (event) {
-    console.log(event.data);
-}
+socket.onmessage = function(event) {
+    console.log(event);
+};
 
 
 function updateSlider(val) {
-    console.log(val.childNodes);
     let span = val.childNodes[2];
     let input = val.childNodes[1];
+
     input.oninput = function() {
         span.innerText=input.value;
     };
     input.oninput();
+
     input.onmouseup = function() {
         let {id, value} = input;
         console.log(id);
-        socket.send(JSON.stringify({[id]: parseInt(value)}));
+        socket.send(JSON.stringify({event: "UPD_SLIDER", name: id, value: parseInt(value)}));
     };
-
 }
 
 
